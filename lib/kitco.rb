@@ -30,6 +30,14 @@ class Kitco
     RUBY_EVAL
   end
 
+  def self.all
+    all = {}
+    SYMBOLS.each do |symbol|
+      all[symbol] = send(symbol)
+    end
+    return all
+  end
+
   class << self
     def request symbol
       get '/RequestHandler', :query => {:requestName => 'getSymbolSnapshot', :Symbol => symbol.to_s.upcase }
